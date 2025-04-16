@@ -25,7 +25,7 @@ fun AuthScreen(modifier: Modifier = Modifier, navController: NavHostController) 
     Column (
         modifier = modifier
             .fillMaxSize()
-            .padding(20.dp)
+            .padding(32.dp)
             ,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,

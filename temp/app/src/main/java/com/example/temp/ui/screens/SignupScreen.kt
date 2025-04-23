@@ -10,6 +10,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import com.example.temp.R
 import androidx.compose.ui.text.TextStyle
@@ -19,13 +20,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.temp.AppUtil
+import com.example.temp.viewmodel.AuthViewModel
 
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier, navController: NavHostController) {
+fun SignupScreen(modifier: Modifier = Modifier, navController: NavHostController, authViewModel: AuthViewModel = viewModel()) {
     var email = remember { mutableStateOf("") }
     var name = remember { mutableStateOf("") }
-    var password = remember { mutableStateOf("") }
+    var password = remember { mutableStateOf("")}
+    var context = LocalContext.current
     Column (
         modifier = modifier
             .fillMaxSize()
@@ -84,7 +89,15 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavHostController
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(onClick = {
-            navController.navigate("login")
+            authViewModel.signup(email.value, name.value, password.value){ success, errorMassage ->
+                if(success){
+
+                }
+                else{
+                    AppUtil.showToast(context,errorMassage?: "Something went wrong")
+                }
+            }
+
         },
             modifier = Modifier
                 .fillMaxWidth()

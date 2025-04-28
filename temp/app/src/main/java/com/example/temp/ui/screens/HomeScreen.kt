@@ -35,7 +35,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController ) {
         NavItem("Profile", icon = Icons.Default.AccountCircle)
     )
 
-    val selectedItem = remember { mutableStateOf(0) }
+    val selectedItem = remember { mutableStateOf(0) } //remember de luu trang thai state, tranh reset moi lan recompose
     Scaffold (
         bottomBar = {
             NavigationBar{

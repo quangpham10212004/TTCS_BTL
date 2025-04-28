@@ -61,4 +61,6 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation(platform("com.google.firebase:firebase-bom:33.12.0"))
     implementation("com.google.firebase:firebase-analytics")
+    implementation("io.coil-kt:coil-compose:2.2.0")
+    implementation("com.tbuonomo:dotsindicator:5.1.0")
 }

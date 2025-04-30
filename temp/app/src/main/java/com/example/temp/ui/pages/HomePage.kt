@@ -5,9 +5,14 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.temp.components.BannerView
+import com.example.temp.components.CategoriesView
 import com.example.temp.components.HeaderView
+import java.time.format.TextStyle
+
 
 @Composable
 fun HomePage(modifier: Modifier = Modifier) {
@@ -17,7 +22,16 @@ fun HomePage(modifier: Modifier = Modifier) {
             .padding(16.dp),
     ) {
         HeaderView(modifier)
-        Spacer(modifier = Modifier.height(3.dp))
-        BannerView(modifier)
+        Spacer(modifier = Modifier.height(10.dp))
+        BannerView(modifier.height(150.dp))
+        Text(
+            text = "Categories",
+            style = androidx.compose.ui.text.TextStyle(
+                fontWeight = FontWeight.Bold,
+                fontSize = 18.sp
+            )
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        CategoriesView(modifier)
     }
 }

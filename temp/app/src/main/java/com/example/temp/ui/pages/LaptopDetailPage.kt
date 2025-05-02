@@ -1,6 +1,8 @@
 package com.example.temp.ui.pages
 
+import android.R
 import android.widget.Space
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -21,6 +24,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -28,6 +32,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.motionEventSpy
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
@@ -60,85 +66,107 @@ fun LaptopDetailPage(modifier: Modifier = Modifier, laptopId: String) {
                 }
             }
     }
-    Column(
-        modifier = modifier
-            .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
-    ) {
-        Text(
-            text = laptop.value.title,
-            fontWeight = FontWeight.Bold,
-            fontSize = 20.sp,
-            modifier = Modifier.padding(8.dp)
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Column(
-            modifier = modifier
-        ) {
-            val pagerState = rememberPagerState(0){ laptop.value.images.size }
-            HorizontalPager(
-                state = pagerState,
-                pageSpacing = 24.dp)
-            {
-                AsyncImage(
-                    model = laptop.value.images.get(it),
-                    contentDescription = "Laptop Image",
-                    modifier = Modifier
-                        .height(250.dp)
-                        .fillMaxWidth()
-                        .clip(RoundedCornerShape(16.dp))
+    Scaffold(
+        modifier = modifier.padding(8.dp),
+        bottomBar = {
+            Row(
+                modifier = Modifier.fillMaxWidth()
+                    .background(MaterialTheme.colorScheme.surfaceVariant),
+                horizontalArrangement = Arrangement.SpaceBetween,
+
+            ) {
+                Text(
+                    text = "VND " + laptop.value.price,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier.padding(8.dp)
                 )
+                Button(
+                    onClick = {
+                        /* TO DO */
+                    },
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .height(50.dp)
+                        .width(100.dp)
+                ){
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = "Add to cart"
+                    )
+                }
             }
 
-            Spacer(modifier = Modifier.height(10.dp))
-            DotsIndicator(
-                dotCount = laptop.value.images.size,
-                type = ShiftIndicatorType(DotGraphic(
-                    color = MaterialTheme.colorScheme.primary,
-                    size = 6.dp
-                )),
-                pagerState = pagerState,
-            )
-
         }
-        Spacer(modifier = Modifier.height(2.dp))
-        Text(
-            text = laptop.value.description,
-            maxLines = 3,
-            overflow = TextOverflow.Ellipsis,
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth()
-                .padding(8.dp),
-            horizontalArrangement = Arrangement.SpaceBetween,
-        ){
+    ){ innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState()),
+        ) {
             Text(
-                text = "VND " + laptop.value.price,
+                text = laptop.value.title,
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
                 modifier = Modifier.padding(8.dp)
             )
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(
+                modifier = modifier
+            ) {
+                val pagerState = rememberPagerState(0) { laptop.value.images.size }
+                HorizontalPager(
+                    state = pagerState,
+                    pageSpacing = 24.dp
+                )
+                {
+                    AsyncImage(
+                        model = laptop.value.images.get(it),
+                        contentDescription = "Laptop Image",
+                        modifier = Modifier
+                            .height(250.dp)
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(16.dp))
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(10.dp))
+                DotsIndicator(
+                    dotCount = laptop.value.images.size,
+                    type = ShiftIndicatorType(
+                        DotGraphic(
+                            color = MaterialTheme.colorScheme.primary,
+                            size = 6.dp
+                        )
+                    ),
+                    pagerState = pagerState,
+                )
+
+            }
+            Spacer(modifier = Modifier.height(2.dp))
+            Text(
+                text = laptop.value.description,
+                maxLines = 3,
+                overflow = TextOverflow.Ellipsis,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                "System Details: ",
+                modifier = Modifier.padding(8.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+            )
+            if (laptop.value.sysDetails.isNotEmpty()) {
+                laptop.value.sysDetails.forEach { (key, value) ->
+                    Text(
+                        text = "$key: $value",
+                        modifier = Modifier.padding(8.dp),
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(8.dp))
 
         }
-        Button(
-            onClick = {},
-            modifier = Modifier.fillMaxWidth()
-                .padding(8.dp).height(50.dp))
-        {
-            Text(
-                text= "Add to my cart"
-            )
-        }
-        if(laptop.value.sysDetails.isNotEmpty()) {
-            laptop.value.sysDetails.forEach { (key, value) ->
-                Text(
-                    text = "$key: $value",
-                    modifier = Modifier.padding(8.dp),
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(8.dp))
     }
 }

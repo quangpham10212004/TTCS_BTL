@@ -1,14 +1,13 @@
 package com.example.temp
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.temp.ui.pages.CategoryProductsPage
+import com.example.temp.ui.pages.LaptopDetailPage
 import com.example.temp.ui.screens.AuthScreen
 import com.example.temp.ui.screens.HomeScreen
 import com.example.temp.ui.screens.LoginScreen
@@ -43,6 +42,11 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         composable(route = "category-products/{categoryId}") {
             var categoryId = it.arguments?.getString("categoryId")
             CategoryProductsPage( modifier,categoryId?:"")
+        }
+
+        composable(route = "laptop-detail/{laptopId}") {
+            var laptopId = it.arguments?.getString("laptopId")
+            LaptopDetailPage( modifier,laptopId?:"")
         }
     }
 }

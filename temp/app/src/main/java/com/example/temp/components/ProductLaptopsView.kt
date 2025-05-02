@@ -1,5 +1,6 @@
 package com.example.temp.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AddCircle
+import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -27,12 +30,17 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
 
 @Composable
 fun ProductLaptopsView(modifier: Modifier = Modifier, item: LaptopModel) {
     Card (
-        modifier = modifier.padding(8.dp),
+        modifier = modifier.padding(8.dp)
+            .clickable{
+                GlobalNavigation.navController.navigate("laptop-detail/"+item.id)
+
+            },
         shape = RoundedCornerShape(12.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(8.dp)
@@ -76,12 +84,15 @@ fun ProductLaptopsView(modifier: Modifier = Modifier, item: LaptopModel) {
                         text = "VND " + item.price,
                         fontSize = 12.sp,
                     )
-                    IconButton(onClick = {  }) {
+                    Button(
+                        onClick = {},
+                        modifier = Modifier.padding(8.dp)
+                            .height(50.dp))
+                    {
                         Icon(
-                            imageVector = Icons.Default.AddCircle,
-                            contentDescription = "Add laptop to cart",
-                            modifier = Modifier.fillMaxSize(),
-                            )
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = "Add to cart button",
+                        )
                     }
                 }
 

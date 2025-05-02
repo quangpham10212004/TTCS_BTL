@@ -8,4 +8,5 @@ data class LaptopModel(
     val price : String = "",
     val status : String = "",
     val images : List<String> = emptyList(),
+    val sysDetails : Map<String, String> = emptyMap(),
 )

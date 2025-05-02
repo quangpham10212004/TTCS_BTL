@@ -30,7 +30,6 @@ import com.google.firebase.ktx.Firebase
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavController ) {
     val navItemList = listOf(
         NavItem("Home", icon = Icons.Default.Home),
-        NavItem("Favorites", icon = Icons.Default.Favorite),
         NavItem("Cart", icon = Icons.Default.ShoppingCart),
         NavItem("Profile", icon = Icons.Default.AccountCircle)
     )
@@ -66,8 +65,7 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController ) {
 fun ContentScreen(modifier: Modifier = Modifier, selectedIndex: Int) {
     when(selectedIndex){
         0 -> HomePage(modifier)
-        1 -> FavouritePage(modifier)
-        2-> CartPage(modifier)
-        3-> ProfilePage(modifier)
+        1-> CartPage(modifier)
+        2-> ProfilePage(modifier)
     }
 }

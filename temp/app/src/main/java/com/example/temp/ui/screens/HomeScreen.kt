@@ -20,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.temp.model.NavItem
 import com.example.temp.ui.pages.CartPage
-import com.example.temp.ui.pages.FavouritePage
 import com.example.temp.ui.pages.HomePage
 import com.example.temp.ui.pages.ProfilePage
 import com.google.firebase.auth.ktx.auth

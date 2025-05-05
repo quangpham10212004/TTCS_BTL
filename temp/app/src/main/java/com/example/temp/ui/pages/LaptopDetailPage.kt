@@ -34,11 +34,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.motionEventSpy
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.temp.AppUtil
 import com.example.temp.model.LaptopModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -53,6 +55,7 @@ fun LaptopDetailPage(modifier: Modifier = Modifier, laptopId: String) {
         mutableStateOf(LaptopModel())
     }
 
+    val context = LocalContext.current
     LaunchedEffect(Unit) {
         Firebase.firestore.collection("data").document("stock")
             .collection("laptops")
@@ -83,7 +86,7 @@ fun LaptopDetailPage(modifier: Modifier = Modifier, laptopId: String) {
                 )
                 Button(
                     onClick = {
-                        /* TO DO */
+                        AppUtil.AddToCart(laptopId, context)
                     },
                     modifier = Modifier
                         .padding(8.dp)

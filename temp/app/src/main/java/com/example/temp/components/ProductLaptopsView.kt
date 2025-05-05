@@ -1,7 +1,6 @@
 package com.example.temp.components
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -25,20 +24,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.temp.AppUtil
 import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
 
 @Composable
 fun ProductLaptopsView(modifier: Modifier = Modifier, item: LaptopModel) {
+    val context= LocalContext.current
     Card (
         modifier = modifier.padding(8.dp)
             .clickable{
-                GlobalNavigation.navController.navigate("laptop-detail/"+item.id)
+                GlobalNavigation.navController.navigate("laptop-detail/"+item.id) // navigate sang trang hien thi lap tuong ung
 
             },
         shape = RoundedCornerShape(12.dp),
@@ -85,7 +87,9 @@ fun ProductLaptopsView(modifier: Modifier = Modifier, item: LaptopModel) {
                         fontSize = 12.sp,
                     )
                     Button(
-                        onClick = {},
+                        onClick = {
+                            AppUtil.AddToCart(item.id, context ) // add to cart
+                        },
                         modifier = Modifier.padding(8.dp)
                             .height(50.dp))
                     {

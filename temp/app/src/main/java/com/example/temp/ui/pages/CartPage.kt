@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,17 +30,18 @@ fun CartPage(modifier: Modifier = Modifier) {
         mutableStateOf(UserModel())
     }
 
-    LaunchedEffect (Unit){
-        Firebase.firestore.collection("users")
+    DisposableEffect (Unit){
+        var lis = Firebase.firestore.collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
-            .get().addOnCompleteListener {
-                if (it.isSuccessful){
-                    var result = it.result?.toObject(UserModel::class.java)
+            .addSnapshotListener { it, exception ->
+                if (it!= null){
+                    var result = it.toObject(UserModel::class.java)
                     if (result != null) {
                         cur_user.value = result
                     }
                 }
             }
+        onDispose { lis.remove() }
     }
 
     Column(
@@ -55,7 +57,7 @@ fun CartPage(modifier: Modifier = Modifier) {
         )
 
         LazyColumn {
-            items(cur_user.value.myCart.toList()) { (laptopId, quantity) ->
+            items(cur_user.value.myCart.toList(), key = {it.first}) { (laptopId, quantity) ->
                 CartItemView(laptopId = laptopId, quantity = quantity);
             }
         }

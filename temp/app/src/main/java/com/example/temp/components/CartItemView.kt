@@ -96,7 +96,9 @@ fun CartItemView(modifier: Modifier = Modifier, laptopId: String, quantity : Lon
                 Row (
                     verticalAlignment = Alignment.CenterVertically,
                 ){
-                    IconButton(onClick = {}){
+                    IconButton(onClick = {
+                        AppUtil.DecreaseNumItem(laptopId, context)
+                    }){
                         Text(
                             "-",
                             fontSize = 20.sp,
@@ -106,9 +108,10 @@ fun CartItemView(modifier: Modifier = Modifier, laptopId: String, quantity : Lon
                     Text(
                         "$quantity",
                         fontSize = 18.sp,
-
                         )
-                    IconButton(onClick = {}){
+                    IconButton(onClick = {
+                        AppUtil.IncreaseNumItem(laptopId, context)
+                    }){
                         Text(
                             "+",
                             fontSize = 20.sp,
@@ -120,7 +123,7 @@ fun CartItemView(modifier: Modifier = Modifier, laptopId: String, quantity : Lon
 
 
             IconButton(onClick = {
-
+                AppUtil.DecreaseNumItem(laptopId, context,wantToDelete = true)
             }){
                 Icon(
                     imageVector = Icons.Default.Delete,

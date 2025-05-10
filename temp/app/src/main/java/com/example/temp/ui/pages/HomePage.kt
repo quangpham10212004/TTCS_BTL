@@ -25,7 +25,7 @@ fun HomePage(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(10.dp))
         BannerView(modifier.height(150.dp))
         Text(
-            text = "Categories",
+            text = "Brands",
             style = androidx.compose.ui.text.TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp

@@ -16,14 +16,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+
 import androidx.navigation.NavController
 import com.example.temp.model.NavItem
 import com.example.temp.ui.pages.CartPage
 import com.example.temp.ui.pages.HomePage
 import com.example.temp.ui.pages.ProfilePage
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
+
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavController ) {

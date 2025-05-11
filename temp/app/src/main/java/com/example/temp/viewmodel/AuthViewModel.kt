@@ -10,7 +10,7 @@ import com.google.firebase.firestore.firestore
 class AuthViewModel : ViewModel() {
     private val auth = Firebase.auth
     private val firestore = Firebase.firestore
-
+    //  dang nhap
     fun login(
         email: String,
         password: String,
@@ -26,7 +26,7 @@ class AuthViewModel : ViewModel() {
                 }
             }
     }
-
+    // dang ki
     fun signup(email: String ,
                name : String ,
                password: String,
@@ -39,8 +39,7 @@ class AuthViewModel : ViewModel() {
 
                     var userModel  = UserModel(name,email,userID!!)
                     firestore.collection("users")
-                        .document(userID)
-                        .set(userModel)
+                        .document(userID).set(userModel)
                         .addOnCompleteListener { dbTask ->
                             if(dbTask.isSuccessful){
                                 onResult(true, null)

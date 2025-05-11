@@ -30,7 +30,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         composable("auth"){ // composable co tac dung dieu huong den giao dien "route"
             AuthScreen(modifier = modifier, navController)
         }
-        composable("login"){
+        composable("login"){ //
             LoginScreen(modifier = modifier,navController)
         }
         composable("signup"){
@@ -41,7 +41,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             HomeScreen(modifier = modifier, navController)
         }
 
-        composable(route = "category-products/{categoryId}") {
+        composable(route = "category-products/{categoryId}") { // template category-products/{categoryId}
             var categoryId = it.arguments?.getString("categoryId")
             BrandProductsPage( modifier,categoryId?:"")
         }

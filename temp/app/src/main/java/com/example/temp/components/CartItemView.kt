@@ -36,13 +36,13 @@ import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-
+// danh sach cac item trong cart duoc invoke CartPage
 @Composable
 fun CartItemView(modifier: Modifier = Modifier, laptopId: String, quantity : Long) {
     var laptop =  remember {
         mutableStateOf(LaptopModel())
     }
-
+    // lay laptop hien co
     LaunchedEffect(Unit) {
         Firebase.firestore.collection("data").document("stock")
             .collection("laptops").document(laptopId)
@@ -55,6 +55,7 @@ fun CartItemView(modifier: Modifier = Modifier, laptopId: String, quantity : Lon
                 }
             }
     }
+
     val context= LocalContext.current
     Card (
         modifier = modifier.padding(8.dp)

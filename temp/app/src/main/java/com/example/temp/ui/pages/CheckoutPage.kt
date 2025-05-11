@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import java.text.NumberFormat
 import java.util.Locale
-
+// checkout khi co y dinh thanh toan
 @Composable
 fun CheckoutPage(modifier: Modifier = Modifier, navController: NavHostController) {
     var userModel = remember{

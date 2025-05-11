@@ -33,7 +33,7 @@ import coil.compose.AsyncImage
 import com.example.temp.AppUtil
 import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
-
+// danh sahc laptop thuoc brand do, duoc invoke trong trong BrandProductsPage
 @Composable
 fun ProductLaptopsView(modifier: Modifier = Modifier, item: LaptopModel) {
     val context= LocalContext.current

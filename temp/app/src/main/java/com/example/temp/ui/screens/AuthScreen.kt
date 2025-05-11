@@ -44,7 +44,7 @@ fun AuthScreen(modifier: Modifier = Modifier, navController: NavHostController) 
                 textAlign = TextAlign.Center,
             )
         )
-        Button(
+        Button( // navigate den man login
             onClick =  { navController.navigate("login") },
             modifier = Modifier
                 .fillMaxWidth()
@@ -60,7 +60,7 @@ fun AuthScreen(modifier: Modifier = Modifier, navController: NavHostController) 
                     textAlign = TextAlign.Center,
                 ))
         }
-        OutlinedButton(
+        OutlinedButton( // navigate den man signup
             onClick =  {navController.navigate("signup")},
             modifier = Modifier
                 .fillMaxWidth()

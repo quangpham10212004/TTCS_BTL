@@ -24,7 +24,7 @@ import androidx.navigation.NavHostController
 import com.example.temp.AppUtil
 import com.example.temp.R
 import com.example.temp.viewmodel.AuthViewModel
-
+// ham ma hinh dang nhap
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,
                 navController: NavHostController,
@@ -63,7 +63,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
+        OutlinedTextField(                              // nhap email
             value = email.value,
             onValueChange = { email.value = it },
             label = { Text("Email") },
@@ -71,7 +71,7 @@ fun LoginScreen(modifier: Modifier = Modifier,
         )
 
         Spacer(modifier = Modifier.height(16.dp))
-        OutlinedTextField(
+        OutlinedTextField(                              //nhap password
             value = password.value,
             onValueChange = { password.value = it },
             label = { Text("Password") },

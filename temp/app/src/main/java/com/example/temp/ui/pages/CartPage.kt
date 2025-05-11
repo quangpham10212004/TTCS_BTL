@@ -30,14 +30,14 @@ import com.example.temp.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
-
+// trang cho gio hang
 @Composable
 fun CartPage(modifier: Modifier = Modifier) {
     val cur_user = remember {
         mutableStateOf(UserModel())
     }
 
-    DisposableEffect (Unit){
+    DisposableEffect (Unit){ // dung disposable vi no co onDispose de kill listener cua firebase moi khi minh recompose, dung LaunchedEffect bth se bi loi
         var lis = Firebase.firestore.collection("users")
             .document(FirebaseAuth.getInstance().currentUser!!.uid)
             .addSnapshotListener { it, exception -> // goi moi khi doc co su thay doi (real-time) ko nhu get().addonlistencomplete,

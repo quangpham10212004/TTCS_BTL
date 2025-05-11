@@ -27,15 +27,18 @@ import com.example.temp.ui.pages.ProfilePage
 
 @Composable
 fun HomeScreen(modifier: Modifier = Modifier, navController: NavController ) {
+    // danh sach cac item trong phan bottomBar
     val navItemList = listOf(
         NavItem("Home", icon = Icons.Default.Home),
         NavItem("Cart", icon = Icons.Default.ShoppingCart),
         NavItem("Profile", icon = Icons.Default.AccountCircle)
     )
 
+
     val selectedItem = rememberSaveable {
         mutableStateOf(0)
     } //remember de luu trang thai state, tranh reset moi lan recompose
+    // rememberSaveable co tac dung giong remember nhung luu du lieu khi he thong rotation
     Scaffold (
         bottomBar = {
             NavigationBar{

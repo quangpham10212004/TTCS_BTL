@@ -88,9 +88,33 @@ object AppUtil { // dang chuc nang con co app
         }
     }
 
+    fun updateProfile(){
+
+    }
+
     fun getDiscount(): Float {
         return 10.0f
     }
+
+
+//    fun updateUserInfo(address: String, phone: String, context: Context) {
+//        val userDoc = Firebase.firestore.collection("users")
+//            .document(FirebaseAuth.getInstance().currentUser?.uid!!)
+//
+//        val updatedInfo = mapOf(
+//            "address" to address,
+//            "phone" to phone
+//        )
+//
+//        userDoc.update(updatedInfo)
+//            .addOnSuccessListener {
+//                showToast(context, "Cập nhật thông tin thành công")
+//            }
+//            .addOnFailureListener {
+//                showToast(context, "Cập nhật thông tin thất bại")
+//            }
+//    }
+
 
 }
 

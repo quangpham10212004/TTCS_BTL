@@ -23,7 +23,7 @@ import com.tbuonomo.viewpagerdotsindicator.compose.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.compose.model.DotGraphic
 import com.tbuonomo.viewpagerdotsindicator.compose.type.ShiftIndicatorType
 
-@Preview(showBackground = true)
+// Banner ow dau trang
 @Composable
 fun BannerView(modifier: Modifier = Modifier) {
     var bannerList = remember{

@@ -16,12 +16,14 @@ import com.example.temp.components.ProductLaptopsView
 import com.example.temp.model.LaptopModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-
+// Product cho moi brand
 @Composable
 fun BrandProductsPage(modifier: Modifier = Modifier,categoryId: String ) {
+
     val laptopList = remember {
         mutableStateOf<List<LaptopModel>>(emptyList())
     }
+    // lay danh sach laptop thuoc brand hien tai
     LaunchedEffect (key1 = Unit) {
         Firebase.firestore.collection("data")
             .document("stock").collection("laptops")

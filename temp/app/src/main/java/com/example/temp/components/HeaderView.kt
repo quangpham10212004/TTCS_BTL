@@ -21,7 +21,7 @@ import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import java.time.format.TextStyle
-
+// header duoc invoke o HomeSreen
 @Composable
 fun HeaderView(modifier: Modifier = Modifier) {
     var name = remember { mutableStateOf("") }

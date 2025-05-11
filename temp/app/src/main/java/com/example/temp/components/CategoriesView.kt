@@ -31,7 +31,7 @@ import com.example.temp.model.CategoryModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 import java.util.Locale
-
+// danh sach cac brand
 @Composable
 fun CategoriesView(modifier: Modifier = Modifier) {
     val categoryList = remember {

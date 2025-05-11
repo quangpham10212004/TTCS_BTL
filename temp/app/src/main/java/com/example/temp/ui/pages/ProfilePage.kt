@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.temp.GlobalNavigation
+import com.example.temp.GlobalNavigation.navController
 import com.example.temp.components.CartItemView
 import com.example.temp.model.UserModel
 import com.google.firebase.Firebase
@@ -31,16 +32,15 @@ import com.google.firebase.firestore.firestore
 fun ProfilePage(modifier: Modifier = Modifier) {
     val curUser = remember { mutableStateOf(UserModel()) }
 
-    Firebase.firestore.collection("users")
+    Firebase.firestore.collection("users") // lay user hien tai
         .document(FirebaseAuth.getInstance().currentUser?.uid!!)
         .get().addOnCompleteListener {
             val result = it.result.toObject(UserModel::class.java)
             if(result != null) {
                 curUser.value = result
-
             }
         }
-
+    val address = curUser.value.address
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -55,7 +55,9 @@ fun ProfilePage(modifier: Modifier = Modifier) {
             )
         )
         HorizontalDivider()
-        Column(modifier=Modifier.weight(1f).fillMaxWidth(),
+        Column(modifier=Modifier
+            .weight(1f)
+            .fillMaxWidth(),
             horizontalAlignment = Alignment.Start)
         {
             Text(
@@ -83,11 +85,35 @@ fun ProfilePage(modifier: Modifier = Modifier) {
                 fontSize = 18.sp,
                 fontWeight = FontWeight.Thin,
             )
-
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Your address:",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "${curUser.value?.address}",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Thin,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Your phone number:",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.SemiBold,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "${curUser.value?.phone}",
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Thin,
+            )
+            Spacer(modifier = Modifier.height(8.dp))
         }
         Button (
             onClick = {
-
+                /*button change information*/
             },
             modifier = Modifier
                 .fillMaxWidth()
@@ -95,6 +121,16 @@ fun ProfilePage(modifier: Modifier = Modifier) {
         ){
             Text("Change information")
         }
-
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = { // button logout
+            FirebaseAuth.getInstance().signOut()
+            navController.navigate("auth")
+        },
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(50.dp))
+        {
+            Text("Logout")
+        }
     }
 }

@@ -21,11 +21,11 @@ fun HomePage(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(16.dp),
     ) {
-        HeaderView(modifier)
+        HeaderView(modifier) // header
         Spacer(modifier = Modifier.height(10.dp))
-        BannerView(modifier.height(150.dp))
+        BannerView(modifier.height(150.dp)) // banner
         Text(
-            text = "Brands",
+            text = "Brands", // danh sach brands
             style = androidx.compose.ui.text.TextStyle(
                 fontWeight = FontWeight.Bold,
                 fontSize = 18.sp

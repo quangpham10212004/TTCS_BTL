@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
@@ -32,7 +33,9 @@ fun HomeScreen(modifier: Modifier = Modifier, navController: NavController ) {
         NavItem("Profile", icon = Icons.Default.AccountCircle)
     )
 
-    val selectedItem = remember { mutableStateOf(0) } //remember de luu trang thai state, tranh reset moi lan recompose
+    val selectedItem = rememberSaveable {
+        mutableStateOf(0)
+    } //remember de luu trang thai state, tranh reset moi lan recompose
     Scaffold (
         bottomBar = {
             NavigationBar{

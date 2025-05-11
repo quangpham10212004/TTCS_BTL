@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.temp.ui.pages.BrandProductsPage
+import com.example.temp.ui.pages.CheckoutPage
 
 import com.example.temp.ui.pages.LaptopDetailPage
 import com.example.temp.ui.screens.AuthScreen
@@ -48,6 +49,10 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         composable(route = "laptop-detail/{laptopId}") {
             var laptopId = it.arguments?.getString("laptopId")
             LaptopDetailPage( modifier,laptopId?:"")
+        }
+
+        composable (route = "checkout") {
+            CheckoutPage(modifier, navController)
         }
     }
 }

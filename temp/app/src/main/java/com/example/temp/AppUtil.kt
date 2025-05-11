@@ -88,6 +88,9 @@ object AppUtil { // dang chuc nang con co app
         }
     }
 
+    fun getDiscount(): Float {
+        return 10.0f
+    }
 
 }
 

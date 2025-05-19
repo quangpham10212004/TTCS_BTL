@@ -1,5 +1,6 @@
 package com.example.temp.components
 
+import android.view.ViewTreeObserver
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.temp.AppNavigation
+import com.example.temp.GlobalNavigation
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
@@ -51,7 +54,9 @@ fun HeaderView(modifier: Modifier = Modifier) {
                 )
 
             )
-            IconButton(onClick = {}) {
+            IconButton(onClick = {
+                GlobalNavigation.navController.navigate("search")
+            }) {
                 Icon(imageVector = Icons.Default.Search, contentDescription = "Search")
             }
         }

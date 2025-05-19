@@ -20,6 +20,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.temp.AppNavigation
 import com.example.temp.GlobalNavigation
 import com.example.temp.GlobalNavigation.navController
 import com.example.temp.components.CartItemView
@@ -113,7 +114,7 @@ fun ProfilePage(modifier: Modifier = Modifier) {
         }
         Button (
             onClick = {
-                /*button change information*/
+                navController.navigate("change-infor")
             },
             modifier = Modifier
                 .fillMaxWidth()

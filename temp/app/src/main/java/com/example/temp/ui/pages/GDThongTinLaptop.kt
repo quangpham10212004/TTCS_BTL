@@ -36,6 +36,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.temp.AppUtil
+import com.example.temp.components.TPHienBinhLuan
+import com.example.temp.components.TPThemBinhLuan
 import com.example.temp.model.LaptopModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
@@ -149,7 +151,7 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                "System Details: ",
+                "Thông tin chi tiết: ",
                 modifier = Modifier.padding(8.dp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
@@ -163,7 +165,15 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
-
+            TPThemBinhLuan(modifier,laptopId)
+            Text(
+                text = "Bình luận: ",
+                modifier = Modifier.padding(8.dp),
+                fontWeight = FontWeight.Bold,
+                fontSize = 20.sp,
+            )
+            Spacer(modifier = Modifier.height(4.dp))
+            TPHienBinhLuan(modifier,laptopId)
         }
     }
 }

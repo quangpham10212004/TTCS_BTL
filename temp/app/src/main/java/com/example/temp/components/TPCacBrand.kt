@@ -30,10 +30,10 @@ import com.example.temp.GlobalNavigation
 import com.example.temp.model.CategoryModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
-import java.util.Locale
+
 // danh sach cac brand
 @Composable
-fun CategoriesView(modifier: Modifier = Modifier) {
+fun TPCacBrand(modifier: Modifier = Modifier) {
     val categoryList = remember {
         mutableStateOf<List<CategoryModel>>(emptyList())
     }
@@ -53,13 +53,13 @@ fun CategoriesView(modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.spacedBy (20.dp) ,
     ){
         items (categoryList.value){ item  ->
-            CategoryItem(category = item)
+            Brand(category = item)
         }
     }
 }
 
 @Composable
-fun CategoryItem(category : CategoryModel){
+fun Brand(category : CategoryModel){
     Card(
         modifier = Modifier.size(90.dp)
             .clickable{

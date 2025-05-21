@@ -6,8 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
@@ -20,17 +18,14 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.temp.AppNavigation
-import com.example.temp.GlobalNavigation
 import com.example.temp.GlobalNavigation.navController
-import com.example.temp.components.CartItemView
 import com.example.temp.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 
 @Composable
-fun ProfilePage(modifier: Modifier = Modifier) {
+fun GDThongTinCaNhan(modifier: Modifier = Modifier) {
     val curUser = remember { mutableStateOf(UserModel()) }
 
     Firebase.firestore.collection("users") // lay user hien tai

@@ -44,7 +44,7 @@ import com.tbuonomo.viewpagerdotsindicator.compose.model.DotGraphic
 import com.tbuonomo.viewpagerdotsindicator.compose.type.ShiftIndicatorType
 // page hien thong tin laptop
 @Composable
-fun LaptopDetailPage(modifier: Modifier = Modifier, laptopId: String) {
+fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
     var laptop = remember {
         mutableStateOf(LaptopModel())
     }

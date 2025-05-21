@@ -9,9 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -23,7 +21,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -34,13 +31,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.temp.AppUtil
-import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 
 @Composable
-fun SearchBarView(modifier: Modifier = Modifier, navController: NavController) {
+fun TPThanhTimKiem(modifier: Modifier = Modifier, navController: NavController) {
     val searchText = remember { mutableStateOf("") } // text input
     val suggestions = remember { mutableStateOf(listOf(LaptopModel())) } // goi y
 

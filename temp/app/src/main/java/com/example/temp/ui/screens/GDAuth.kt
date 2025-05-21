@@ -15,13 +15,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import com.example.temp.AppNavigation
 import com.example.temp.R
 
 @Composable
-fun AuthScreen(modifier: Modifier = Modifier, navController: NavHostController) {
+fun GDAuth(modifier: Modifier = Modifier, navController: NavHostController) {
     Column (
         modifier = modifier
             .fillMaxSize()

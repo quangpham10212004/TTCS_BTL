@@ -6,17 +6,18 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.temp.components.SearchBarView
+import com.example.temp.components.TPThanhTimKiem
+import com.example.temp.ui.pages.GDCacSPDuocTimKiem
+import com.example.temp.ui.pages.GDSPTungBrand
+import com.example.temp.ui.pages.GDThanhToan
+import com.example.temp.ui.pages.GDThongTinLaptop
 
-import com.example.temp.ui.pages.BrandProductsPage
-import com.example.temp.ui.pages.CheckoutPage
 
-import com.example.temp.ui.pages.LaptopDetailPage
-import com.example.temp.ui.pages.SearchItemsPage
-import com.example.temp.ui.screens.AuthScreen
-import com.example.temp.ui.screens.HomeScreen
-import com.example.temp.ui.screens.LoginScreen
-import com.example.temp.ui.screens.SignupScreen
+import com.example.temp.ui.screens.GDAuth
+import com.example.temp.ui.screens.GDDangKy
+import com.example.temp.ui.screens.GDDangNhap
+import com.example.temp.ui.screens.GDHome
+
 import com.google.firebase.Firebase
 import com.google.firebase.auth.auth
 
@@ -31,39 +32,39 @@ fun AppNavigation(modifier: Modifier = Modifier) {
     GlobalNavigation.navController = navController
     NavHost(navController = navController, startDestination = firstPage ) {
         composable("auth"){ // composable co tac dung dieu huong den giao dien "route"
-            AuthScreen(modifier = modifier, navController)
+            GDAuth(modifier = modifier, navController)
         }
         composable("login"){ //
-            LoginScreen(modifier = modifier,navController)
+            GDDangNhap(modifier = modifier,navController)
         }
         composable("signup"){
-            SignupScreen(modifier = modifier, navController)
+            GDDangKy(modifier = modifier, navController)
         }
 
         composable(route = "home"){
-            HomeScreen(modifier = modifier, navController)
+            GDHome(modifier = modifier, navController)
         }
 
         composable(route = "category-products/{categoryId}") { // template category-products/{categoryId}
             var categoryId = it.arguments?.getString("categoryId")
-            BrandProductsPage( modifier,categoryId?:"")
+            GDSPTungBrand( modifier,categoryId?:"")
         }
 
         composable(route = "laptop-detail/{laptopId}") {
             var laptopId = it.arguments?.getString("laptopId")
-            LaptopDetailPage( modifier,laptopId?:"")
+            GDThongTinLaptop( modifier,laptopId?:"")
         }
 
         composable (route = "checkout") {
-            CheckoutPage(modifier, navController)
+            GDThanhToan(modifier, navController)
         }
 
         composable ("search") {
-            SearchBarView(modifier, navController)
+            TPThanhTimKiem(modifier, navController)
         }
         composable (route = "search/{searchText}") {
             var searchText = it.arguments?.getString("searchText")
-            SearchItemsPage(modifier,searchText?:"")
+            GDCacSPDuocTimKiem(modifier,searchText?:"")
         }
     }
 }

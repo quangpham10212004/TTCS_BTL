@@ -29,7 +29,7 @@ import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
 
 @Composable
-fun SearchItemsView(modifier: Modifier = Modifier, item : LaptopModel ) {
+fun TPCacSPDuocTimKiem(modifier: Modifier = Modifier, item : LaptopModel ) {
     val context= LocalContext.current
     Card (
         modifier = modifier.padding(8.dp)

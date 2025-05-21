@@ -1,6 +1,5 @@
 package com.example.temp.components
 
-import android.view.ViewTreeObserver
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -18,15 +17,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.temp.AppNavigation
 import com.example.temp.GlobalNavigation
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
-import java.time.format.TextStyle
+
 // header duoc invoke o HomeSreen
 @Composable
-fun HeaderView(modifier: Modifier = Modifier) {
+fun TPTieuDe(modifier: Modifier = Modifier) {
     var name = remember { mutableStateOf("") }
     LaunchedEffect(Unit) {
         Firebase.firestore.collection("users")

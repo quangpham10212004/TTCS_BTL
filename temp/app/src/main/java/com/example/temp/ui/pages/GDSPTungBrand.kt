@@ -12,13 +12,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.temp.components.ProductLaptopsView
+import com.example.temp.components.TPSanPhamTungBrand
 import com.example.temp.model.LaptopModel
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.firestore
 // Product cho moi brand
 @Composable
-fun BrandProductsPage(modifier: Modifier = Modifier,categoryId: String ) {
+fun GDSPTungBrand(modifier: Modifier = Modifier,categoryId: String ) {
 
     val laptopList = remember {
         mutableStateOf<List<LaptopModel>>(emptyList())
@@ -44,7 +44,7 @@ fun BrandProductsPage(modifier: Modifier = Modifier,categoryId: String ) {
         items (laptopList.value.chunked (2)) { chunkedItems ->
             Row{
                 chunkedItems.forEach { item ->
-                    ProductLaptopsView(modifier= Modifier.weight(1f), item = item)
+                    TPSanPhamTungBrand(modifier= Modifier.weight(1f), item = item)
                 }
                 if(chunkedItems.size == 1){
                     Spacer(modifier = Modifier.weight(1f))

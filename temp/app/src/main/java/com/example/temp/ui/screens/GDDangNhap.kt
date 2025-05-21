@@ -1,6 +1,5 @@
 package com.example.temp.ui.screens
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -11,7 +10,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
@@ -22,11 +20,10 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.example.temp.AppUtil
-import com.example.temp.R
 import com.example.temp.viewmodel.AuthViewModel
 // ham ma hinh dang nhap
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier,
+fun GDDangNhap(modifier: Modifier = Modifier,
                 navController: NavHostController,
                 authViewModel: AuthViewModel = viewModel()) {
     var email = remember { mutableStateOf("") }

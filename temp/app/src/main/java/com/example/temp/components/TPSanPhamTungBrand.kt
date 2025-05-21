@@ -3,22 +3,16 @@ package com.example.temp.components
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.AddCircle
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -35,7 +29,7 @@ import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
 // danh sahc laptop thuoc brand do, duoc invoke trong trong BrandProductsPage
 @Composable
-fun ProductLaptopsView(modifier: Modifier = Modifier, item: LaptopModel) {
+fun TPSanPhamTungBrand(modifier: Modifier = Modifier, item: LaptopModel) {
     val context= LocalContext.current
     Card (
         modifier = modifier.padding(8.dp)

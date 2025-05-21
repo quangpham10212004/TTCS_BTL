@@ -30,7 +30,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 // ham cho form dang ki
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier, navController: NavHostController, authViewModel: AuthViewModel = viewModel()) {
+fun GDDangKy(modifier: Modifier = Modifier, navController: NavHostController, authViewModel: AuthViewModel = viewModel()) {
     var email = remember { mutableStateOf("") }
     var name = remember { mutableStateOf("") }
     var address = remember { mutableStateOf("") }

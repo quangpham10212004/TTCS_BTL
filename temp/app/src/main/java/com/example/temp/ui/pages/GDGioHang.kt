@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
@@ -13,26 +12,23 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextRange
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.temp.GlobalNavigation
-import com.example.temp.components.CartItemView
-import com.example.temp.model.NavItem
+import com.example.temp.components.TPSanPhamTrongGioHang
 import com.example.temp.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 // trang cho gio hang
 @Composable
-fun CartPage(modifier: Modifier = Modifier) {
+fun GDGioHang(modifier: Modifier = Modifier) {
     val cur_user = remember {
         mutableStateOf(UserModel())
     }
@@ -67,7 +63,7 @@ fun CartPage(modifier: Modifier = Modifier) {
             modifier = Modifier.weight(1f),
         ) {
             items(cur_user.value.myCart.toList(), key = {it.first}) { (laptopId, quantity) ->
-                CartItemView(laptopId = laptopId, quantity = quantity);
+                TPSanPhamTrongGioHang(laptopId = laptopId, quantity = quantity);
             }
         }
 

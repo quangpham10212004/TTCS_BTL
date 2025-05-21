@@ -32,7 +32,7 @@ import java.text.NumberFormat
 import java.util.Locale
 // checkout khi co y dinh thanh toan
 @Composable
-fun CheckoutPage(modifier: Modifier = Modifier, navController: NavHostController) {
+fun GDThanhToan(modifier: Modifier = Modifier, navController: NavHostController) {
     var userModel = remember{
         mutableStateOf(UserModel())
     }
@@ -93,9 +93,9 @@ fun CheckoutPage(modifier: Modifier = Modifier, navController: NavHostController
             )
         )
         HorizontalDivider()
-        ShowInfo("Origin Price", PreTotal.value.toString())
-        ShowInfo("Discount", discount.value.toString())
-        ShowInfo("Final Total", FinalTotal.value.toString())
+        InThongTin("Origin Price", PreTotal.value.toString())
+        InThongTin("Discount", discount.value.toString())
+        InThongTin("Final Total", FinalTotal.value.toString())
         HorizontalDivider()
         Column (Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally){
@@ -112,7 +112,7 @@ fun CheckoutPage(modifier: Modifier = Modifier, navController: NavHostController
 
 }
 @Composable
-fun ShowInfo(title: String, value: String) {
+fun InThongTin(title: String, value: String) {
     Row(modifier = Modifier
         .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween,

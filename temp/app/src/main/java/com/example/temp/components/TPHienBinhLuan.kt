@@ -3,7 +3,6 @@ package com.example.temp.components
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -34,7 +33,7 @@ fun TPHienBinhLuan(
     ) {
     var comments by remember { mutableStateOf(listOf<CommentModel>()) }
     val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-
+    var commentIDs by remember { mutableStateOf(emptyList<String>()) }
 
     LaunchedEffect (Unit){
         Firebase.firestore.collection("data").document("stock")
@@ -44,15 +43,21 @@ fun TPHienBinhLuan(
                 if(exception != null || snapshot == null) {
                     return@addSnapshotListener
                 }
-                val result = snapshot.documents.mapNotNull { comment ->  comment.toObject(CommentModel::class.java) }
-                comments = result
+                val result = snapshot.documents.mapNotNull { doc ->
+                    val comment = doc.toObject(CommentModel::class.java)
+                    comment?.let {
+                        it.copy(reply_Id = comment.reply_Id) to doc.id
+                    }
+                }
+                comments = result.map { it.first }
+                commentIDs = result.map { it.second }
             }
     }
     Column(
         modifier = modifier.fillMaxWidth().padding(8.dp),
 
     ){
-        comments.forEach { comment ->
+        comments.zip(commentIDs).forEach { (comment, commentID) ->
             Row {
                 Text(comment.userName, modifier = Modifier.weight(1F),
                     fontSize = 20.sp,
@@ -64,6 +69,7 @@ fun TPHienBinhLuan(
             Spacer(modifier = Modifier.height(3.dp))
             Text(comment.content, fontSize = 16.sp)
             HorizontalDivider()
+            TPReply(modifier,laptopId,commentID, comment.userName)
         }
     }
 

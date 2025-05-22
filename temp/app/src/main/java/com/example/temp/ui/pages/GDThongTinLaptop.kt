@@ -36,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.temp.AppUtil
+import com.example.temp.GlobalNavigation
 import com.example.temp.components.TPHienBinhLuan
 import com.example.temp.components.TPThemBinhLuan
 import com.example.temp.model.LaptopModel
@@ -82,7 +83,7 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                 )
                 Button(
                     onClick = {
-                        AppUtil.AddToCart(laptopId, context)
+                        GlobalNavigation.navController.navigate("cart") // tro den gio hang
                     },
                     modifier = Modifier
                         .padding(8.dp)
@@ -167,12 +168,23 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
             Spacer(modifier = Modifier.height(8.dp))
             TPThemBinhLuan(modifier,laptopId)
             Text(
-                text = "Bình luận: ",
+                text = "Bình luận & đánh giá: ",
                 modifier = Modifier.padding(8.dp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
             )
-            Spacer(modifier = Modifier.height(4.dp))
+            Spacer(modifier = Modifier.height(3.dp))
+            Button(
+                onClick = {
+                    AppUtil.AddToCart(laptopId, context)
+                },
+                modifier = Modifier
+                    .padding(8.dp)
+                    .height(50.dp)
+                    .width(100.dp)
+            ){
+                Text("Thêm vào giỏ hàng")
+            }
             TPHienBinhLuan(modifier,laptopId)
         }
     }

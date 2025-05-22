@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.temp.components.TPThanhTimKiem
 import com.example.temp.ui.pages.GDCacSPDuocTimKiem
+import com.example.temp.ui.pages.GDGioHang
 import com.example.temp.ui.pages.GDSPTungBrand
 import com.example.temp.ui.pages.GDThanhToan
 import com.example.temp.ui.pages.GDThongTinLaptop
@@ -65,6 +66,10 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         composable (route = "search/{searchText}") {
             var searchText = it.arguments?.getString("searchText")
             GDCacSPDuocTimKiem(modifier,searchText?:"")
+        }
+
+        composable ("cart"){
+            GDGioHang(modifier)
         }
     }
 }

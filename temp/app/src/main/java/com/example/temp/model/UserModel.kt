@@ -7,4 +7,5 @@ data class UserModel(
     var myCart: Map<String, Long> = mapOf(), // ko gan thanh empty map no bat dang nhap phai nhap ca map :))
     var address : String = "",
     var phone: String = "",
+    var role : String = "client"
 )

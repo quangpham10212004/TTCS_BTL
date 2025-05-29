@@ -19,6 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Button
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -149,6 +150,7 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                 text = laptop.value.description,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.padding(8.dp)
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
@@ -166,6 +168,18 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = {
+                    AppUtil.AddToCart(laptopId, context)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+                    .height(50.dp)
+            ){
+                Text("Thêm vào giỏ hàng")
+            }
+            HorizontalDivider(thickness = 1.dp)
             TPThemBinhLuan(modifier,laptopId)
             Text(
                 text = "Bình luận & đánh giá: ",
@@ -173,18 +187,7 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp,
             )
-            Spacer(modifier = Modifier.height(3.dp))
-            Button(
-                onClick = {
-                    AppUtil.AddToCart(laptopId, context)
-                },
-                modifier = Modifier
-                    .padding(8.dp)
-                    .height(50.dp)
-                    .width(100.dp)
-            ){
-                Text("Thêm vào giỏ hàng")
-            }
+
             TPHienBinhLuan(modifier,laptopId)
         }
     }

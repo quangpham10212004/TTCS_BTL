@@ -16,6 +16,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -27,14 +32,31 @@ import coil.compose.AsyncImage
 import com.example.temp.AppUtil
 import com.example.temp.GlobalNavigation
 import com.example.temp.model.LaptopModel
+import com.example.temp.model.UserModel
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.firestore
+
 // danh sahc laptop thuoc brand do, duoc invoke trong trong BrandProductsPage
 @Composable
 fun TPSanPhamTungBrand(modifier: Modifier = Modifier, item: LaptopModel) {
+    var role by remember { mutableStateOf("") }
+    LaunchedEffect (Unit){
+        Firebase.firestore.collection("users")
+            .document(FirebaseAuth.getInstance().currentUser!!.uid)
+            .get().addOnCompleteListener {
+                if(it.isSuccessful){
+                    val result = it.result.toObject(UserModel::class.java)
+                    role = result?.role ?: ""
+                }
+            }
+    }
     val context= LocalContext.current
     Card (
-        modifier = modifier.padding(8.dp)
-            .clickable{
-                GlobalNavigation.navController.navigate("laptop-detail/"+item.id) // navigate sang trang hien thi lap tuong ung
+        modifier = modifier
+            .padding(8.dp)
+            .clickable {
+                GlobalNavigation.navController.navigate("laptop-detail/" + item.id) // navigate sang trang hien thi lap tuong ung
 
             },
         shape = RoundedCornerShape(12.dp),
@@ -80,17 +102,21 @@ fun TPSanPhamTungBrand(modifier: Modifier = Modifier, item: LaptopModel) {
                         text = "VND " + item.price,
                         fontSize = 12.sp,
                     )
-                    Button(
-                        onClick = {
-                            AppUtil.AddToCart(item.id, context ) // add to cart
-                        },
-                        modifier = Modifier.padding(8.dp)
-                            .height(50.dp))
-                    {
-                        Icon(
-                            imageVector = Icons.Default.ShoppingCart,
-                            contentDescription = "Add to cart button",
+                    if(role!= "admin"){
+                        Button(
+                            onClick = {
+                                AppUtil.AddToCart(item.id, context) // add to cart
+                            },
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .height(50.dp)
                         )
+                        {
+                            Icon(
+                                imageVector = Icons.Default.ShoppingCart,
+                                contentDescription = "Add to cart button",
+                            )
+                        }
                     }
                 }
 

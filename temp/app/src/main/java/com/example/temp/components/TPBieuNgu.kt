@@ -54,7 +54,7 @@ fun TPBieuNgu(modifier: Modifier = Modifier) {
             dotCount = bannerList.value.size,
             type = ShiftIndicatorType(DotGraphic(
                 color = MaterialTheme.colorScheme.primary,
-                size = 6.dp
+                size = 8.dp
             )),
             pagerState = pagerState,
         )

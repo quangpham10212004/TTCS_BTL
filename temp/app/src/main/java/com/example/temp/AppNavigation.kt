@@ -11,6 +11,7 @@ import com.example.temp.ui.pages.GDCacSPDuocTimKiem
 import com.example.temp.ui.pages.GDGioHang
 import com.example.temp.ui.pages.GDSPTungBrand
 import com.example.temp.ui.pages.GDThanhToan
+import com.example.temp.ui.pages.GDThayDoiThongTin
 import com.example.temp.ui.pages.GDThongTinLaptop
 
 
@@ -67,7 +68,9 @@ fun AppNavigation(modifier: Modifier = Modifier) {
             var searchText = it.arguments?.getString("searchText")
             GDCacSPDuocTimKiem(modifier,searchText?:"")
         }
-
+        composable("change-infor") {
+            GDThayDoiThongTin(modifier, navController)
+        }
         composable ("cart"){
             GDGioHang(modifier)
         }

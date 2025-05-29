@@ -85,7 +85,8 @@ fun TPThanhTimKiem(modifier: Modifier = Modifier, navController: NavController) 
                     Icon(Icons.AutoMirrored.Filled.ArrowForward, contentDescription = "Go")
                 }
             },
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp)
         )
         if(searchText.value.isNotEmpty()){ // khi khong tim ra ket qua nao
             if(suggestions.value.isEmpty()){

@@ -1,5 +1,6 @@
 package com.example.temp.ui.pages
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,7 +49,9 @@ fun GDGioHang(modifier: Modifier = Modifier) {
     }
 
     Column(
-        modifier = modifier.fillMaxSize().padding(8.dp),
+        modifier = modifier
+            .fillMaxSize()
+            .padding(8.dp),
         horizontalAlignment = Alignment.CenterHorizontally)
     {
         Text(
@@ -67,15 +70,24 @@ fun GDGioHang(modifier: Modifier = Modifier) {
             }
         }
 
-        Button (
-            onClick = {
-                GlobalNavigation.navController.navigate("checkout")
-            },
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-            ){
-            Text("Check out")
+        if(cur_user.value.myCart.size > 0){
+            Button(
+                onClick = {
+                    GlobalNavigation.navController.navigate("checkout")
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
+            ) {
+                Text("Check out")
+            }
+        }
+        else{
+            Column (modifier = Modifier.fillMaxSize().padding(8.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center) {
+                Text("Giỏ hàng trống")
+            }
         }
 
     }

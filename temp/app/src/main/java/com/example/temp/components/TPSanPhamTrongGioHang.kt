@@ -34,7 +34,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 // danh sach cac item trong cart duoc invoke CartPage
 @Composable
-fun TPSanPhamTrongGioHang(modifier: Modifier = Modifier, laptopId: String, quantity : Long) {
+fun TPSanPhamTrongGioHang(modifier: Modifier = Modifier, laptopId: String, quantity : Long, inCart: Boolean = true) {
     var laptop =  remember {
         mutableStateOf(LaptopModel())
     }
@@ -54,9 +54,10 @@ fun TPSanPhamTrongGioHang(modifier: Modifier = Modifier, laptopId: String, quant
 
     val context= LocalContext.current
     Card (
-        modifier = modifier.padding(8.dp)
-            .clickable{
-                GlobalNavigation.navController.navigate("laptop-detail/"+laptop.value.id) // navigate sang trang hien thi lap tuong ung
+        modifier = modifier
+            .padding(8.dp)
+            .clickable {
+                GlobalNavigation.navController.navigate("laptop-detail/" + laptop.value.id) // navigate sang trang hien thi lap tuong ung
 
             },
         shape = RoundedCornerShape(12.dp),
@@ -77,7 +78,9 @@ fun TPSanPhamTrongGioHang(modifier: Modifier = Modifier, laptopId: String, quant
             )
 
             Column(
-                modifier = Modifier.padding(8.dp).weight(1f)
+                modifier = Modifier
+                    .padding(8.dp)
+                    .weight(1f)
             ){
                 Text(
                     laptop.value.title,
@@ -93,40 +96,50 @@ fun TPSanPhamTrongGioHang(modifier: Modifier = Modifier, laptopId: String, quant
                 Row (
                     verticalAlignment = Alignment.CenterVertically,
                 ){
-                    IconButton(onClick = {
-                        AppUtil.DecreaseNumItem(laptopId, context)
-                    }){
-                        Text(
-                            "-",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
-                        )
-                    }
+                    if(inCart){
+                        IconButton(onClick = {
+                            AppUtil.DecreaseNumItem(laptopId, context)
+                        }) {
+                            Text(
+                                "-",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+
                     Text(
                         "$quantity",
                         fontSize = 18.sp,
                         )
-                    IconButton(onClick = {
-                        AppUtil.IncreaseNumItem(laptopId, context)
-                    }){
+
+                        IconButton(onClick = {
+                            AppUtil.IncreaseNumItem(laptopId, context)
+                        }) {
+                            Text(
+                                "+",
+                                fontSize = 20.sp,
+                                fontWeight = FontWeight.Bold,
+                            )
+                        }
+                    }
+                    else{
                         Text(
-                            "+",
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.Bold,
+                            "Số lượng: ${quantity}"
                         )
                     }
                 }
             }
 
 
-            IconButton(onClick = {
-                AppUtil.DecreaseNumItem(laptopId, context,wantToDelete = true)
-            }){
-                Icon(
-                    imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete button",
-
-                )
+            if(inCart){
+                IconButton(onClick = {
+                    AppUtil.DecreaseNumItem(laptopId, context, wantToDelete = true)
+                }) {
+                    Icon(
+                        imageVector = Icons.Default.Delete,
+                        contentDescription = "Delete button",
+                        )
+                }
             }
 
 

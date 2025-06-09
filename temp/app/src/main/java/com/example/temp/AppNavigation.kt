@@ -2,6 +2,7 @@ package com.example.temp
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -14,6 +15,9 @@ import com.example.temp.ui.pages.GDThanhToan
 import com.example.temp.ui.pages.GDThayDoiThongTin
 import com.example.temp.ui.pages.GDThongTinLaptop
 
+import com.example.temp.ui.pages.GDDonHangChiTiet
+import com.example.temp.ui.pages.GDFormSPMoi
+import com.example.temp.ui.pages.GDSuaThongTinSP
 
 import com.example.temp.ui.screens.GDAuth
 import com.example.temp.ui.screens.GDDangKy
@@ -73,6 +77,18 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         }
         composable ("cart"){
             GDGioHang(modifier)
+        }
+        composable ("orders/{orderId}"){
+            val orderId = it.arguments?.getString("orderId")
+            GDDonHangChiTiet(modifier, orderId?:"")
+        }
+        composable ("new"){
+            GDFormSPMoi(modifier)
+        }
+
+        composable ("change-infor-sp/{laptopId}"){
+            var laptopId = it.arguments?.getString("laptopId")
+            GDSuaThongTinSP(modifier, laptopId ?:"")
         }
     }
 }

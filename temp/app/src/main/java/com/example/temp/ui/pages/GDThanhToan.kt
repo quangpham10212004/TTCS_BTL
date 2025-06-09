@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.example.temp.AppUtil
 import com.example.temp.model.LaptopModel
+import com.example.temp.model.OrderModel
 import com.example.temp.model.UserModel
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
@@ -93,19 +95,60 @@ fun GDThanhToan(modifier: Modifier = Modifier, navController: NavHostController)
             )
         )
         HorizontalDivider()
-        InThongTin("Origin Price", PreTotal.value.toString())
-        InThongTin("Discount", discount.value.toString())
-        InThongTin("Final Total", FinalTotal.value.toString())
+        InThongTin("Giá gốc", NumberFormat.getCurrencyInstance(Locale.US).format(PreTotal.value/26000))
+        InThongTin("Khuyến mãi", NumberFormat.getCurrencyInstance(Locale.US).format(discount.value/26000))
+        InThongTin("Tổng giá" , NumberFormat.getCurrencyInstance(Locale.US).format(FinalTotal.value/26000) )
         HorizontalDivider()
         Column (Modifier.padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally){
             Text(
-                text = "You need to pay: ",
+                text = "Số tiền bạn cần phải trả: ",
             )
             Text(
                 "VND "+ NumberFormat.getCurrencyInstance(Locale("vi","VN")).format(FinalTotal.value),
                 fontWeight = FontWeight.Bold,
             )
+
+        }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            Button(
+                onClick = {
+                    navController.popBackStack()
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Quay lại")
+            }
+
+            Button(
+                onClick = {
+                    val userId = FirebaseAuth.getInstance().currentUser!!.uid
+                    val newOrder = OrderModel(
+                        userId = userId,
+                        items = userModel.value.myCart,
+                        total_price = FinalTotal.value.toLong()
+                    )
+
+                    val db = Firebase.firestore
+                        db.collection("orders").add(newOrder)
+                            .addOnCompleteListener {
+                                db.collection("users")
+                                    .document(userId).update("myCart", mapOf<String, Long>())
+                                    .addOnCompleteListener {
+                                        navController.popBackStack()
+                                    }
+                            }
+
+                },
+                modifier = Modifier.weight(1f)
+            ) {
+                Text("Xác nhận đơn")
+            }
         }
 
     }

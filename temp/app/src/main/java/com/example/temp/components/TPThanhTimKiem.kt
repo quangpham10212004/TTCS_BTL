@@ -50,7 +50,22 @@ fun TPThanhTimKiem(modifier: Modifier = Modifier, navController: NavController) 
                 .get()
                 .addOnSuccessListener { result ->
                     val filtered = result.documents.mapNotNull { it.toObject(LaptopModel::class.java) }
-                        .filter { it.title.contains(query, ignoreCase = true) }
+                        .filter { laptop ->
+                            val lowerQuery = query.lowercase()
+                            val searchableContent = listOf(
+                                laptop.title,
+                                laptop.description,
+                                laptop.category,
+                                laptop.price,
+                                laptop.status,
+                                laptop.sysDetails["CPU"] ?: "",
+                                laptop.sysDetails["GPU"] ?: "",
+                                laptop.sysDetails["RAM"] ?: "",
+                                laptop.sysDetails["Monitor"] ?: "",
+                                laptop.sysDetails["Pin"] ?: ""
+                            ).joinToString(" ").lowercase()
+
+                            searchableContent.contains(lowerQuery) }
                         .take(5) // Giới hạn 5 gợi ý
                     suggestions.value = filtered
                 }

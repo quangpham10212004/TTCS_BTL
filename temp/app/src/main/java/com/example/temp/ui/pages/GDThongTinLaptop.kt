@@ -42,6 +42,7 @@ import com.example.temp.components.TPHienBinhLuan
 import com.example.temp.components.TPThemBinhLuan
 import com.example.temp.model.LaptopModel
 import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.firestore
 import com.tbuonomo.viewpagerdotsindicator.compose.DotsIndicator
 import com.tbuonomo.viewpagerdotsindicator.compose.model.DotGraphic
@@ -49,6 +50,8 @@ import com.tbuonomo.viewpagerdotsindicator.compose.type.ShiftIndicatorType
 // page hien thong tin laptop
 @Composable
 fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
+    val uid = FirebaseAuth.getInstance().currentUser?.uid
+    val role = remember { mutableStateOf("") }
     var laptop = remember {
         mutableStateOf(LaptopModel())
     }
@@ -66,12 +69,22 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                     }
                 }
             }
+
+        Firebase.firestore.collection("users").document(uid!!).get().addOnCompleteListener {
+            if (it.isSuccessful) {
+                var userResult = it.result.get("role")
+                if (userResult != null) {
+                    role.value = userResult.toString()
+                }
+            }
+        }
     }
     Scaffold(
         modifier = modifier.padding(8.dp),
         bottomBar = {
             Row(
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 horizontalArrangement = Arrangement.SpaceBetween,
 
@@ -82,19 +95,21 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                     fontSize = 20.sp,
                     modifier = Modifier.padding(8.dp)
                 )
-                Button(
-                    onClick = {
-                        GlobalNavigation.navController.navigate("cart") // tro den gio hang
-                    },
-                    modifier = Modifier
-                        .padding(8.dp)
-                        .height(50.dp)
-                        .width(100.dp)
-                ){
-                    Icon(
-                        imageVector = Icons.Default.ShoppingCart,
-                        contentDescription = "Add to cart"
-                    )
+                if(role.value != "admin"){
+                    Button(
+                        onClick = {
+                            GlobalNavigation.navController.navigate("cart") // tro den gio hang
+                        },
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .height(50.dp)
+                            .width(100.dp)
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.ShoppingCart,
+                            contentDescription = "Add to cart"
+                        )
+                    }
                 }
             }
 
@@ -168,16 +183,31 @@ fun GDThongTinLaptop(modifier: Modifier = Modifier, laptopId: String) {
                 }
             }
             Spacer(modifier = Modifier.height(8.dp))
-            Button(
-                onClick = {
-                    AppUtil.AddToCart(laptopId, context)
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(8.dp)
-                    .height(50.dp)
-            ){
-                Text("Thêm vào giỏ hàng")
+            if(role.value != "admin"){
+                Button(
+                    onClick = {
+                        AppUtil.AddToCart(laptopId, context)
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .height(50.dp)
+                ) {
+                    Text("Thêm vào giỏ hàng")
+                }
+            }
+            else{
+                Button(
+                    onClick = {
+                        GlobalNavigation.navController.navigate("change-infor-sp/${laptopId}")
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(8.dp)
+                        .height(50.dp)
+                ) {
+                    Text("Sửa thông tin mặt hàng")
+                }
             }
             HorizontalDivider(thickness = 1.dp)
             TPThemBinhLuan(modifier,laptopId)

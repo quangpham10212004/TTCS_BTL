@@ -44,7 +44,7 @@ fun GDSPTungBrand(modifier: Modifier = Modifier,categoryId: String ) {
         items (laptopList.value.chunked (2)) { chunkedItems ->
             Row{
                 chunkedItems.forEach { item ->
-                    TPSanPhamTungBrand(modifier= Modifier.weight(1f), item = item)
+                    TPSanPhamTungBrand(modifier= Modifier.weight(1f), item = item, onDeletedItem = {})
                 }
                 if(chunkedItems.size == 1){
                     Spacer(modifier = Modifier.weight(1f))

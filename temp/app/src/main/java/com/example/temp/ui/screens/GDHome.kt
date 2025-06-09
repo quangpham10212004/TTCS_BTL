@@ -2,11 +2,14 @@ package com.example.temp.ui.screens
 
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.*
@@ -17,10 +20,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-
 import androidx.navigation.NavController
 import com.example.temp.model.NavItem
 import com.example.temp.model.UserModel
+import com.example.temp.ui.pages.GDDonHang
 import com.example.temp.ui.pages.GDGioHang
 import com.example.temp.ui.pages.GDQuanLyDonHang
 import com.example.temp.ui.pages.GDQuanLyTaiKhoan
@@ -36,6 +39,7 @@ fun GDHome(modifier: Modifier = Modifier, navController: NavController) {
     val navItemList = listOf(
         NavItem("Home", icon = Icons.Default.Home),
         NavItem("Cart", icon = Icons.Default.ShoppingCart),
+        NavItem("Orders", icon = Icons.Default.DateRange),
         NavItem("Profile", icon = Icons.Default.AccountCircle),
     )
 
@@ -70,9 +74,13 @@ fun GDHome(modifier: Modifier = Modifier, navController: NavController) {
     val selectedItem = rememberSaveable { mutableStateOf(0) }
 
     if (isLoading.value || user.value == null) {
-        // Bạn có thể return CircularProgressIndicator ở đây nếu muốn loading UI
+
         Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator()
+            Column(modifier = Modifier.fillMaxWidth(),
+                horizontalAlignment = Alignment.CenterHorizontally,) {
+                CircularProgressIndicator()
+                Text(text = "Please wait...")
+            }
         }
         return
     }
@@ -108,7 +116,9 @@ fun ContentScreen(modifier: Modifier = Modifier, selectedIndex: Int) {
     when(selectedIndex){
         0 -> HomePage(modifier)
         1 -> GDGioHang(modifier)
-        2 -> GDThongTinCaNhan(modifier)
+        2 -> GDDonHang(modifier)
+        3 -> GDThongTinCaNhan(modifier)
+
     }
 }
 @Composable
